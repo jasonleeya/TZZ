@@ -1,10 +1,10 @@
 <template>
-   <div>PageThree</div>
+
 </template>
 
 <script>
     export default {
-        name: "PageThree"
+        name: "MarketFinance"
     }
 </script>
 

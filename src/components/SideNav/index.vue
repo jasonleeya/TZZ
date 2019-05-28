@@ -1,16 +1,16 @@
 <template>
    <div class="side-nav">
       <div class="logo">
-         <img class="logo-img" :src="require('@/assets/logo.png')" alt="">
-         <div class="logo-text" v-if="!asideCollapse">Logo</div>
+         <div class="logo-text" v-if="!asideCollapse">天之哲</div>
       </div>
       <el-menu class="side-nav-menu"
                :collapse="asideCollapse"
                :unique-opened="true"
+               :router="true"
                ref="menu">
          <template v-for="menu in list">
             <menu-item v-if="menu.children === undefined" :menu="menu" :key="menu.id"/>
-            <menu-sub v-else :menu="menu" :key="menu.id"/>
+            <menu-sub :asideCollapse="asideCollapse" v-else :menu="menu" :key="menu.id"/>
          </template>
       </el-menu>
    </div>
@@ -32,53 +32,71 @@
                 asideCollapse: false,
                 list: [
                     {
-                        title: '一级菜单1',
+                        title: '模拟考管理',
                         id: 'f1',
-                        icon: 'iconguanbi1',
+                        icon: 'iconkaoshiguanli',
                         children: [
                             {
-                                title: '二级菜单1-1',
+                                title: '考试管理',
                                 id: 's1',
-                                children: [
-                                    {
-                                        title: '三级菜单1-1-1',
-                                        id: 't1',
-                                        path: '/'
-                                    }, {
-                                        title: '三级菜单1-1-2',
-                                        id: 't2',
-                                        path: '/two'
-                                    },
-
-                                ]
+                                path: '/exam'
                             }, {
-                                title: '二级菜单1-2',
-                                id: 's3',
-                                path: '/three'
-                            }, {
-                                title: '二级菜单1-3',
-                                id: 's4',
-                                path: '/four'
-                            },
+                                title: '打分系统',
+                                id: 's2',
+                                path: '/score'
+                            }
                         ]
                     },
                     {
-                        title: '一级菜单2',
+                        title: '社群管理',
                         id: 'f2',
-                        icon: 'iconguanbi1',
+                        icon: 'iconshequ',
+                        path:'/community'
+                    },
+                    {
+                        title: '商品管理',
+                        id: 'f3',
+                        icon: 'iconshangpinguanli',
                         children: [
                             {
-                                title: '二级菜单2-1',
+                                title: '商品管理',
                                 id: 's5',
-                                children: [
-                                    {
-                                        title: '三级菜单2-1-1',
-                                        id: 't3',
-                                    }
-                                ]
+                                path: '/goods'
+                            }, {
+                                title: '订单管理',
+                                id: 's6',
+                                path: '/order'
                             }
                         ]
-                    }
+                    },
+                    {
+                        title: '作品管理',
+                        id: 'f4',
+                        icon: 'iconzuopin',
+                        path:'/work'
+                    },
+                    {
+                        title: '财务管理',
+                        id: 'f5',
+                        icon: 'iconshangpinguanli',
+                        children: [
+                            {
+                                title: '模拟考',
+                                id: 's7',
+                                path: '/mockexam'
+                            }, {
+                                title: '商城财务',
+                                id: 's8',
+                                path: '/market'
+                            }
+                        ]
+                    },
+                    {
+                        title: '轮播图管理',
+                        id: 'f6',
+                        icon: 'iconlunbotuzujian',
+                        path:'/banner'
+                    },
                 ]
             }
         },
@@ -112,6 +130,7 @@
    }
 
    .logo {
+      /*height: 47px;*/
       text-align: center;
       width: 100%;
       padding-top: 10px;

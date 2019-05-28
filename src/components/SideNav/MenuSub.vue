@@ -1,7 +1,7 @@
 <template>
    <el-submenu :index="menu.id" >
       <template slot="title">
-         <i :class="'iconfont '+menu.icon"></i>
+         <i :class="'iconfont '+menu.icon" class="side-nav-ico"></i>
          <span slot="title">{{menu.title}}</span>
       </template>
       <template v-for="child in menu.children">
@@ -16,7 +16,8 @@
     export default {
         name: "MenuSub",
         props: {
-            menu: {}
+            menu: {},
+            asideCollapse:false
         },
         components:{
             MenuItem
@@ -28,4 +29,5 @@
    .iconfont {
       margin-right: 10px;
    }
+
 </style>

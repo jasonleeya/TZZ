@@ -1,12 +1,13 @@
 <template>
-   <div>PageFour</div>
+
 </template>
 
 <script>
     export default {
-        name: "PageFour"
+        name: "WorkManage"
     }
 </script>
+
 
 <style scoped>
 

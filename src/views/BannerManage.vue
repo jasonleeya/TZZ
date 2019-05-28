@@ -1,10 +1,10 @@
 <template>
-   <div>PageOne</div>
+
 </template>
 
 <script>
     export default {
-        name: "PageOne"
+        name: "BannerManager"
     }
 </script>
 

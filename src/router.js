@@ -13,39 +13,74 @@ export default new Router({
   },{
       path: '/',
       name: 'Index',
-      redirect: '/one',
+      redirect: '/home',
       component: () => import( './views/Index'),
       children:[
           {
               //因为某些设置首页路由只能为 "/"
               path: '',
-              component: () => import( './views/PageOne'),
+              component: () => import( './views/Home'),
               meta:{
                   cName:'首页'
               }
           }, {
-              path: '/two',
-              component: () => import( './views/PageTwo'),
+
+              path: '/exam',
+              component: () => import( './views/ExamManage'),
               meta:{
-                  cName:'页面二'
+                  cName:'考试管理'
               }
           }, {
-              path: '/three',
-              component: () => import( './views/PageThree'),
+              path: '/score',
+              component: () => import( './views/ScoreSystem'),
               meta:{
-                  cName:'页面三'
+                  cName:'打分系统'
               }
           }, {
-              path: '/four',
-              component: () => import( './views/PageFour'),
+              path: '/community',
+              component: () => import( './views/CommunityManage'),
               meta:{
-                  cName:'页面四'
+                  cName:'社群管理'
+              }
+          }, {
+              path: '/goods',
+              component: () => import( './views/GoodsManage'),
+              meta:{
+                  cName:'商品管理'
+              }
+          },{
+              path: '/order',
+              component: () => import( './views/OrderManage'),
+              meta:{
+                  cName:'订单管理'
+              }
+          },{
+              path: '/work',
+              component: () => import( './views/WorkManage'),
+              meta:{
+                  cName:'作品管理'
+              }
+          },{
+              path: '/mockexam',
+              component: () => import( './views/MockExam'),
+              meta:{
+                  cName:'模拟考'
+              }
+          },{
+              path: '/market',
+              component: () => import( './views/MarketFinance'),
+              meta:{
+                  cName:'商城财务'
+              }
+          },{
+              path: '/banner',
+              component: () => import( './views/BannerManage'),
+              meta:{
+                  cName:'轮播图管理'
               }
           },
           {
               path:'*',
-              name:'Login',
-              component: () => import( './views/Login'),
               redirect: '/',
           },
       ]

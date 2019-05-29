@@ -94,7 +94,8 @@
                 if (this.$store.state.bookmarkList.length > 1) {
                     this.$store.dispatch('deleteBookmark', name)
                     this.$router.push(this.$store.state.bookmarkList[this.$store.state.bookmarkList.length - 1].path);
-                } else if (this.$store.state.bookmarkList.length === 1 && this.$route.path === '/') {
+                    //Todo
+                } else if (this.$store.state.bookmarkList.length === 1 && this.$route.path === '/exam') {
                 } else {
                     this.$store.dispatch('deleteBookmark', name)
                     this.$router.push('/');

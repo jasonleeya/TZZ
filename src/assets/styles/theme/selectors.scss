@@ -1,3 +1,4 @@
+@import "../common.scss";
 body[theme=#{$themeName}] {
   @include cover;
 
@@ -7,10 +8,14 @@ body[theme=#{$themeName}] {
     //transition: background-color .1s, color 1s;
   }
 
-  .el-main {
+  .el-main{
     background-color: $mainBgColor;
     border: 1px solid $borderColor;
-
+    >div{
+      background-color: #fff;
+      border-radius: 4px;
+      padding: 20px;
+    }
   }
 
   .content-container {
@@ -38,12 +43,12 @@ body[theme=#{$themeName}] {
 
     .el-menu-item:focus, .el-menu-item:hover, .el-submenu__title:hover, .el-submenu .el-menu-item:hover {
       background-color: $sideNavHoverBGColor !important;
-      border-right: 5px solid #1890FF;
+      border-right: 5px solid $deepBlue;
     }
 
     .el-menu-item:focus, .el-menu-item:hover, .el-submenu__title:focus, .el-submenu__title:hover {
       background-color: $sideNavHoverBGColor !important;
-      border-right: 5px solid #1890FF;
+      border-right: 5px solid $deepBlue;
 
     }
 
@@ -51,7 +56,7 @@ body[theme=#{$themeName}] {
     .el-menu-item:hover,
     .el-submenu__title:focus,
     .el-submenu__title:hover .el-icon-arrow-down:before {
-      color: #1890FF !important;
+      color: $deepBlue !important;
 
     }
 
@@ -59,28 +64,28 @@ body[theme=#{$themeName}] {
     .el-menu-item:hover:hover span,
     .el-submenu__title:hover span,
     .el-submenu .el-menu-item:hover span {
-      color: #1890FF;
+      color: $deepBlue;
     }
 
     .el-menu-item:focus span,
     .el-menu-item:hover span,
     .el-submenu__title:focus span,
     .el-submenu__title:hover span {
-      color: #1890FF;
+      color: $deepBlue;
     }
 
     .el-menu-item:focus:hover .side-nav-ico:before,
     .el-menu-item:hover:hover .side-nav-ico:before,
     .el-submenu__title:hover .side-nav-ico:before,
     .el-submenu .el-menu-item:hover .side-nav-ico:before {
-      color: #1890FF;
+      color: $deepBlue;
     }
 
     .el-menu-item:focus .side-nav-ico:before,
     .el-menu-item:hover .side-nav-ico:before,
     .el-submenu__title:focus .side-nav-ico:before,
     .el-submenu__title:hover .side-nav-ico:before {
-      color: #1890FF;
+      color: $deepBlue;
     }
 
     .el-menu-item.is-active {
@@ -100,7 +105,7 @@ body[theme=#{$themeName}] {
     }
   }
 
-  .header {
+   .main-header {
     * {
       user-select: none;
     }

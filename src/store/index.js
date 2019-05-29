@@ -6,10 +6,15 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
     state: {
+        loading: false,
         isSideNavCollapse: false,
         bookmarkList: [],
     },
     mutations: {
+        fullScreenLoading(state, payload) {
+            state.loading=payload
+        },
+
         toggleSideNavCollapseStatus(state) {
             state.isSideNavCollapse = !state.isSideNavCollapse
         },
@@ -51,8 +56,6 @@ export default new Vuex.Store({
         toggleSideNavCollapse({commit}) {
             commit('toggleSideNavCollapseStatus')
         },
-
-
         clearBookmark({commit}) {
             commit('clearBookmarkStatus')
         },

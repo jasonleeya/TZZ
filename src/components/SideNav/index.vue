@@ -41,9 +41,24 @@
                                 id: 's1',
                                 path: '/exam'
                             }, {
-                                title: '打分系统',
+                                title: '阅卷系统',
                                 id: 's2',
-                                path: '/score'
+                                children: [
+                                    {
+                                        title: '联考阅卷',
+                                        id: 't1',
+                                        path: '/joint'
+                                    }, {
+                                        title: '校考阅卷',
+                                        id: 't2',
+                                        path: '/school'
+                                    },
+                                ]
+                            },
+                            {
+                                title:"排名系统",
+                                id:'s9',
+                                path:'/rank'
                             }
                         ]
                     },
@@ -51,7 +66,7 @@
                         title: '社群管理',
                         id: 'f2',
                         icon: 'iconshequ',
-                        path:'/community'
+                        path: '/community'
                     },
                     {
                         title: '商品管理',
@@ -60,12 +75,16 @@
                         children: [
                             {
                                 title: '商品管理',
-                                id: 's5',
+                                id: 's3',
                                 path: '/goods'
                             }, {
                                 title: '订单管理',
-                                id: 's6',
+                                id: 's4',
                                 path: '/order'
+                            }, {
+                                title: '评价管理',
+                                id: 's5',
+                                path: '/evaluate'
                             }
                         ]
                     },
@@ -73,20 +92,20 @@
                         title: '作品管理',
                         id: 'f4',
                         icon: 'iconzuopin',
-                        path:'/work'
+                        path: '/work'
                     },
                     {
                         title: '财务管理',
                         id: 'f5',
-                        icon: 'iconshangpinguanli',
+                        icon: 'iconcaiwuguanli',
                         children: [
                             {
                                 title: '模拟考',
-                                id: 's7',
+                                id: 's6',
                                 path: '/mockexam'
                             }, {
                                 title: '商城财务',
-                                id: 's8',
+                                id: 's7',
                                 path: '/market'
                             }
                         ]
@@ -95,7 +114,7 @@
                         title: '轮播图管理',
                         id: 'f6',
                         icon: 'iconlunbotuzujian',
-                        path:'/banner'
+                        path: '/banner'
                     },
                 ]
             }

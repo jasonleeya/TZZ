@@ -1,5 +1,5 @@
 <template>
-   <div class="header">
+   <div class="main-header">
       <div class="header-top">
          <el-tooltip :content="asideCollapse?'关闭':'展开'" :open-delay="800" :hide-after="0" placement="right" effect="light">
             <span @click="toggleSideNavCollapse" v-if="!asideCollapse" class="iconfont iconcaidanguan"></span>

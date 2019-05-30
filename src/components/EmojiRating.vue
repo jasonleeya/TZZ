@@ -14,15 +14,20 @@
                 scale: 0
             }
         },
-        mounted() {
-           this.value=60
-        },
         props: {
-            refresh: Boolean
+            refresh: Boolean,
+            score:{
+                type:[String,Number],
+                default:60
+            }
         },
-        watch: {
-            value(n,o) {
-                this.$emit('score',n)
+        mounted() {
+            this.value=parseInt(this.score)
+            this.attachEmoji()
+        },
+
+        methods: {
+            attachEmoji() {
                 if (this.value === 100) {
                     this.scale = 10
                 } else if (this.value >= 90 && this.value < 100) {
@@ -44,19 +49,29 @@
                 } else if (this.value >= 10 && this.value < 20) {
                     this.scale = 1;
                 } else {
-                    this.scale=0
+                    this.scale = 0
                 }
-                document.querySelector('.el-slider__button').innerHTML = this.emoji[this.scale];
+                // document.querySelectorAll('.emoji-rating .el-slider__button').innerHTML = this.emoji[this.scale]
+                document.querySelectorAll('.emoji-rating .el-slider__button').forEach((item) => {
+                    item.innerHTML=this.emoji[this.scale]
+                });
+            }
+        },
+        watch: {
+            value(n,o) {
+                this.$emit('score',n)
+               this.attachEmoji()
             },
+            //进入页面重新刷新emoji
             refresh:{
                 handler(newVal) {
-                    if (this.refresh === false) {
-                        this.value=60;
+                    if (this.refresh) {
+                        this.attachEmoji()
                     }
-                },
-                immediate:true,
-                deep: true
+                }, deep: true,
+                immediate: true
             }
+
         }
     }
 </script>
@@ -67,6 +82,8 @@
       border: none;
       padding-bottom: 45px;
       background-color: transparent;
+      width: 40px;
+      height: 40px;
    }
    .el-slider__bar {
       background-color: transparent;

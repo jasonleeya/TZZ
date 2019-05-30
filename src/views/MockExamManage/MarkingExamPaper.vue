@@ -40,8 +40,7 @@
             <student-work-item :id="item.id"
                                :imgUrl="item.img"
                                :userId="item.user_id"
-                               :subjectId="item.subject_id"
-                               @clickItemInfo="handleGetClickItemInfo">
+                               :subjectId="item.subject_id">
             </student-work-item>
          </el-col>
 
@@ -58,32 +57,25 @@
       </el-pagination>
 
 
-      <marking-dialog :showDialog="isShowDialog"
-                      :showImgUrl="showImgUrl"
-                      @closeDialog="handleCloseDialog">
-      </marking-dialog>
 
       <div class="right-side">
-         <div class="score-rank" v-for="item in scoreList" :key="item.limit">
-            <span class="limit">{{item.limit}}</span>
-            <div class="count">{{item.count}}人</div>
-            <el-slider disabled v-model="item.percent"></el-slider>
-            <span class="iconfont edit iconbianji1" @click="handleEdit(item.limit)"></span>
-            <span class="percent">{{item.percent}}%</span>
-         </div>
+
+
+         <score-rank :scoreList="scoreList"></score-rank>
       </div>
+
    </div>
 </template>
 
 <script>
     import StudentWorkItem from '@/components/StudentWorkItem'
-    import MarkingDialog from '@/components/MarkingDialog'
+    import ScoreRank from '@/components/ScoreRank'
 
     export default {
         name: "MarkingExamPaper",
         components: {
             StudentWorkItem,
-            MarkingDialog
+            ScoreRank
         },
         data() {
             return {
@@ -93,10 +85,6 @@
                     options: [],
                     selected: ''
                 },
-                isShowDialog: false,
-                showImgUrl: '',
-                score: 60,
-                shortComment: '',
                 page: {
                     currentPage: 1,
                     pageSize: 12,
@@ -236,11 +224,6 @@
             handleChooseExamPaper() {
 
             },
-            handleGetClickItemInfo(info) {
-                this.showImgUrl = info.imgUrl;
-                this.isShowDialog = true
-            },
-
 
             handlePageSizeChange(val) {
                 this.page.pageSize = val;
@@ -252,47 +235,13 @@
                 this.page.currentPage = val;
                 // this.getData()
             },
-            handleCloseDialog() {
-                this.isShowDialog = !this.isShowDialog
-            },
-            handleEdit(limit) {
-                console.log(limit)
-                this.$router.push({name:'RankDetail',params:{limit:limit}})
-            }
-        },
-        watch: {
-            isShowDialog() {
-                if (this.isShowDialog === false) {
-                    this.score = 60;
 
-                }
-            }
-        }
+
+        },
+
     }
 </script>
-<style lang="scss">
-   @import "../../assets/styles/common.scss";
 
-   .right-side {
-      .el-slider {
-         .el-slider__button {
-            display: none;
-         }
-
-         .el-slider__runway, .el-slider__bar {
-            height: 10px;
-         }
-
-         .el-slider__runway.disabled .el-slider__bar {
-            background-color: $deepBlue;
-         }
-
-         .el-slider__button-wrapper {
-            display: none !important;
-         }
-      }
-   }
-</style>
 
 <style scoped lang="scss">
    @import "../../assets/styles/common.scss";
@@ -352,50 +301,6 @@
          right: 0;
          top: 75px;
 
-         .score-rank {
-            height: 70px;
-            position: relative;
-
-            .el-slider {
-               position: absolute;
-               width: 100px;
-               left: 55px;
-               top: 13px;
-            }
-
-            .count {
-               font-size: 12px;
-               position: absolute;
-               left: 10px;
-               bottom: 30px;
-            }
-
-            .limit {
-               font-size: 12px;
-               font-weight: bold;
-               position: absolute;
-               left: 10px;
-               top: 10px;
-            }
-
-            .percent {
-               color: $blue;
-               font-size: 15px;
-               position: absolute;
-               right: 10px;
-               bottom: 30px;
-            }
-            .edit {
-               color: $blue;
-               position: absolute;
-               right: 10px;
-               bottom: 50px;
-               &:hover {
-                  color: $deepBlue;
-               }
-
-            }
-         }
 
       }
 

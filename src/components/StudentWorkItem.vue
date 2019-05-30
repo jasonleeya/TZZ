@@ -1,6 +1,9 @@
 <template>
    <div class="student-work-item" @click="viewImage(imgUrl)">
       <img :src="imgUrl" alt="">
+
+
+
    </div>
 </template>
 

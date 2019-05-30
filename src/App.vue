@@ -1,6 +1,8 @@
 <template>
    <div id="app" v-loading.fullscreen.lock="Loading">
-      <router-view/>
+     <keep-alive>
+        <router-view/>
+     </keep-alive>
    </div>
 </template>
 <script>

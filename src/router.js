@@ -50,6 +50,13 @@ export default new Router({
                 meta: {
                     cName: '校考阅卷'
                 }
+            }, {
+                path: '/detail',
+                name: 'RankDetail',
+                component: () => import( './views/MockExamManage/RankDetail'),
+                meta: {
+                    cName: '排名详情'
+                }
             },
             {
                 path: '/rank',

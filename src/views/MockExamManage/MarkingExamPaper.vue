@@ -47,24 +47,28 @@
 
       </el-row>
 
+      <el-pagination
+              @size-change="handlePageSizeChange"
+              @current-change="handleCurrentPageChange"
+              :current-page="page.currentPage"
+              :page-sizes="[10, 20, 50, 100]"
+              :page-size="page.pageSize"
+              layout="total, sizes, prev, pager, next, jumper"
+              :total="page.total">
+      </el-pagination>
 
-      <el-dialog :visible.sync="showDialog"
-                 title="为此作品评分"
-                 top="10px">
-         <img class="dialog-img"
-              :src="showImgUrl" alt="">
-         <el-button @click="showDialog=false">确定评分</el-button>
-         <emoji-rating @score="handleScore" :refresh="showDialog"></emoji-rating>
-         <span class="score">{{score+'分'}}</span>
-         <el-input v-model="shortComment" class="textarea" type='textarea' :rows="2" placeholder="请输入短评">
-         </el-input>
-      </el-dialog>
+
+      <marking-dialog :showDialog="isShowDialog"
+                      :showImgUrl="showImgUrl"
+                      @closeDialog="handleCloseDialog">
+      </marking-dialog>
 
       <div class="right-side">
          <div class="score-rank" v-for="item in scoreList" :key="item.limit">
             <span class="limit">{{item.limit}}</span>
             <div class="count">{{item.count}}人</div>
             <el-slider disabled v-model="item.percent"></el-slider>
+            <span class="iconfont edit iconbianji1" @click="handleEdit(item.limit)"></span>
             <span class="percent">{{item.percent}}%</span>
          </div>
       </div>
@@ -73,13 +77,13 @@
 
 <script>
     import StudentWorkItem from '@/components/StudentWorkItem'
-    import EmojiRating from '@/components/EmojiRating'
+    import MarkingDialog from '@/components/MarkingDialog'
 
     export default {
         name: "MarkingExamPaper",
         components: {
             StudentWorkItem,
-            EmojiRating
+            MarkingDialog
         },
         data() {
             return {
@@ -89,10 +93,15 @@
                     options: [],
                     selected: ''
                 },
-                showDialog: false,
+                isShowDialog: false,
                 showImgUrl: '',
                 score: 60,
                 shortComment: '',
+                page: {
+                    currentPage: 1,
+                    pageSize: 12,
+                    total: 0
+                },
                 examType: {
                     active: 1,
                     list: [{
@@ -142,6 +151,26 @@
                         img: require('../../assets/img/u=2922170376,2371336021&fm=27&gp=0.jpg'),
                         subject_id: '11',
                         user_id: '666',
+                    }, {
+                        id: '8',
+                        img: require('../../assets/img/u=2922170376,2371336021&fm=27&gp=0.jpg'),
+                        subject_id: '11',
+                        user_id: '666',
+                    }, {
+                        id: '9',
+                        img: require('../../assets/img/u=2922170376,2371336021&fm=27&gp=0.jpg'),
+                        subject_id: '11',
+                        user_id: '666',
+                    }, {
+                        id: '10',
+                        img: require('../../assets/img/u=2922170376,2371336021&fm=27&gp=0.jpg'),
+                        subject_id: '11',
+                        user_id: '666',
+                    }, {
+                        id: '11',
+                        img: require('../../assets/img/u=2922170376,2371336021&fm=27&gp=0.jpg'),
+                        subject_id: '11',
+                        user_id: '666',
                     },
                 ],
                 scoreList: [{
@@ -187,6 +216,7 @@
             /* this.mySelect('getWorkByExamSubject', {exam_id: '1', name: '色彩'}).then(data => {
                  this.studentWorkList = data;
              })*/
+            this.page.total = this.studentWorkList.length
         },
         methods: {
             chooseType(type) {
@@ -207,18 +237,32 @@
 
             },
             handleGetClickItemInfo(info) {
-                console.log(info);
                 this.showImgUrl = info.imgUrl;
-                this.showDialog = true
+                this.isShowDialog = true
             },
 
-            handleScore(score) {
-                this.score = score
+
+            handlePageSizeChange(val) {
+                this.page.pageSize = val;
+                this.page.currentPage = 1;
+                // this.getData()
+            },
+
+            handleCurrentPageChange(val) {
+                this.page.currentPage = val;
+                // this.getData()
+            },
+            handleCloseDialog() {
+                this.isShowDialog = !this.isShowDialog
+            },
+            handleEdit(limit) {
+                console.log(limit)
+                this.$router.push({name:'RankDetail',params:{limit:limit}})
             }
         },
         watch: {
-            showDialog() {
-                if (this.showDialog === false) {
+            isShowDialog() {
+                if (this.isShowDialog === false) {
                     this.score = 60;
 
                 }
@@ -227,60 +271,24 @@
     }
 </script>
 <style lang="scss">
-   .el-dialog {
-      width: 1100px;
-
-      .el-dialog__body {
-         position: relative;
-
-         .el-button {
-            position: absolute;
-            right: 150px;
-            top: 300px;
-         }
-
-         .emoji-rating {
-            position: absolute;
-            right: 40px;
-            top: 30px;
-         }
-
-         .score {
-            position: absolute;
-            right: 140px;
-            top: 100px;
-            font-size: 50px;
-            color: red;
-         }
-
-         .textarea {
-            position: absolute;
-            right: 40px;
-            width: 300px !important;
-            top: 200px;
-
-            .el-textarea__inner {
-               width: 300px !important;
-            }
-         }
-
-      }
-
-   }
+   @import "../../assets/styles/common.scss";
 
    .right-side {
       .el-slider {
-        .el-slider__button {
-           display: none;
-        }
-         .el-slider__runway ,.el-slider__bar{
+         .el-slider__button {
+            display: none;
+         }
+
+         .el-slider__runway, .el-slider__bar {
             height: 10px;
          }
+
          .el-slider__runway.disabled .el-slider__bar {
-            background-color: #409EFF;
+            background-color: $deepBlue;
          }
+
          .el-slider__button-wrapper {
-            display: none!important;
+            display: none !important;
          }
       }
    }
@@ -292,7 +300,8 @@
 
    .marking-exam-paper {
       position: relative;
-      min-height: 700px;
+      min-height: 740px;
+      padding-bottom: 40px !important;
 
       .header {
          position: relative;
@@ -370,19 +379,33 @@
             }
 
             .percent {
+               color: $blue;
                font-size: 15px;
                position: absolute;
                right: 10px;
                bottom: 30px;
             }
+            .edit {
+               color: $blue;
+               position: absolute;
+               right: 10px;
+               bottom: 50px;
+               &:hover {
+                  color: $deepBlue;
+               }
+
+            }
          }
 
       }
-   }
 
-   .dialog-img {
-      width: 700px;
-      min-height: 400px;
+      .el-pagination {
+         margin-top: 20px;
+         position: absolute;
+         bottom: 10px;
+         right: 220px;
+
+      }
    }
 
 

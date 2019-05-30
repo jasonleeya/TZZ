@@ -12,7 +12,7 @@
                </el-dropdown-menu>
             </el-dropdown>
 
-
+                     <!--城市选择-->
             <el-select size="small"
                        v-model="citySelect.selected"
                        filterable
@@ -122,7 +122,7 @@
         filters: {},
         methods: {
             chooseType(type) {
-                this.getData(type)
+                this.getData(type);
 
                 this.choosedType = type;
             },
@@ -141,6 +141,7 @@
                     page: this.page.currentPage,
                     page_size: this.page.pageSize
                 }).then((res) => {
+                    /*转换数据*/
                     res.data.forEach(item => {
                         item.projects = '';
                         item.tab === 1 ? item.tab = "联考" : item.tab = "校考";
@@ -148,7 +149,7 @@
                             item.projects += sub.name + ':' + sub.price + '元; \xa0';
                         })
                     });
-                    this.tableData = res.data
+                    this.tableData = res.data;
                     this.page.total = res.Total
                 })
 
@@ -170,12 +171,10 @@
             handleSelectCities(query) {
 
                 if (query !== '') {
-                    this.citySelect.loading = true
-
-
+                    this.citySelect.loading = true;
                     this.mySelect('getCities', {name: query}, false).then(cities => {
-                        this.citySelect.loading = false
-                        this.citySelect.options = []
+                        this.citySelect.loading = false;
+                        this.citySelect.options = [];
                         cities.forEach(city => {
                             this.citySelect.options.push({
                                 value: city.Cname,

@@ -1,14 +1,14 @@
 <template>
    <div class="student-work-item">
       <img :src="imgUrl" alt="" @click="isShowDialog=true">
-      <div class="show-score" v-if="score !== ''" >{{score}}分</div>
+      <div class="show-score" v-if="score !== ''">{{score}}分</div>
       <el-dialog :visible.sync="isShowDialog"
                  title="为此作品评分"
                  top="10px">
          <img class="dialog-img"
               :src="imgUrl" alt="">
          <el-button @click="handleSubmitMarking">确定评分</el-button>
-         <emoji-rating @score="handleGetScore" :refresh="isShowDialog"  :score="getScore"></emoji-rating>
+         <emoji-rating @score="handleGetScore" :refresh="isShowDialog" :score="getScore"></emoji-rating>
          <span class="score">{{getScore+'分'}}</span>
          <el-input v-model="getShortComment" class="textarea" type='textarea' :rows="2" placeholder="请输入短评">
          </el-input>
@@ -31,11 +31,11 @@
             userId: '',
             subjectId: '',
             score: {
-                type:String,
+                type: String,
                 default: ''
             },
             shortComment: {
-                type:String,
+                type: String,
                 default: ''
             }
 
@@ -50,7 +50,7 @@
         mounted() {
             if (this.score !== '') {
                 this.getScore = this.score;
-                this.getShortComment=this.shortComment
+                this.getShortComment = this.shortComment
             }
         },
         methods: {
@@ -73,60 +73,63 @@
 </script>
 
 <style lang="scss">
-   .el-dialog {
-      width: 1100px;
+   .student-work-item {
 
-      .el-dialog__body {
-         position: relative;
 
-         .el-button {
-            position: absolute;
-            right: 150px;
-            top: 300px;
-         }
+      .el-dialog {
+         width: 1100px;
 
-         .emoji-rating {
-            position: absolute;
-            right: 40px;
-            top: 30px;
-         }
+         .el-dialog__body {
+            position: relative;
 
-         .score {
-            position: absolute;
-            right: 140px;
-            top: 100px;
-            font-size: 50px;
-            color: red;
-         }
+            .el-button {
+               position: absolute;
+               right: 150px;
+               top: 300px;
+            }
 
-         .textarea {
-            position: absolute;
-            right: 40px;
-            width: 300px !important;
-            top: 200px;
+            .emoji-rating {
+               position: absolute;
+               right: 40px;
+               top: 30px;
+            }
 
-            .el-textarea__inner {
+            .score {
+               position: absolute;
+               right: 140px;
+               top: 100px;
+               font-size: 50px;
+               color: red;
+            }
+
+            .textarea {
+               position: absolute;
+               right: 40px;
                width: 300px !important;
+               top: 200px;
+
+               .el-textarea__inner {
+                  width: 300px !important;
+               }
+            }
+
+            .dialog-img {
+               width: 700px;
+               min-height: 400px;
             }
          }
-
-         .dialog-img {
-            width: 700px;
-            min-height: 400px;
-         }
-
-
       }
-
    }
 </style>
 
 <style scoped lang="scss">
    @import "../assets/styles/common";
+
    .student-work-item {
       height: 200px;
       width: 100%;
       margin-bottom: 10px;
+      position: relative;
 
       img {
          display: block;
@@ -134,7 +137,10 @@
          width: 100%;
          height: 100%;
       }
+
       .show-score {
+         position: absolute;
+         bottom: 0;
          font-size: 16px;
          width: 100%;
          height: 20px;

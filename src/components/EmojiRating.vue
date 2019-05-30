@@ -22,7 +22,7 @@
             }
         },
         mounted() {
-            this.value=parseInt(this.score)
+            this.value=parseInt(this.score);
             this.attachEmoji()
         },
 
@@ -59,7 +59,7 @@
         },
         watch: {
             value(n,o) {
-                this.$emit('score',n)
+                this.$emit('score',n);
                this.attachEmoji()
             },
             //进入页面重新刷新emoji

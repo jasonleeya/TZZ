@@ -56,13 +56,23 @@
               :total="page.total">
       </el-pagination>
 
-
-
       <div class="right-side">
-
 
          <score-rank :scoreList="scoreList"></score-rank>
       </div>
+      <el-dialog title="分享试卷" class="shear-dialog" :visible.sync="isShowShearDialog">
+         <el-input v-model="shareLinkDeepCopy"></el-input>
+         <el-button ref="copy" type="primary" @click="handleCopyLink">复制链接</el-button>
+         <el-radio-group v-model="sharingMethod">
+            <el-radio :label="1">私有</el-radio>
+            <el-radio :label="2">密码访问</el-radio>
+         </el-radio-group>
+         <div class="description">
+            <span>仅知道链接的人可以访问</span>
+            <span>仅知道密码的人可以访问</span>
+         </div>
+      </el-dialog>
+
 
    </div>
 </template>
@@ -90,6 +100,11 @@
                     pageSize: 12,
                     total: 0
                 },
+                isShowShearDialog: false,
+                shareLink: 'https://www.baidu.com/public',
+                //深度拷贝
+                shareLinkDeepCopy: '',
+                sharingMethod: 1,
                 examType: {
                     active: 1,
                     list: [{
@@ -204,6 +219,7 @@
             /* this.mySelect('getWorkByExamSubject', {exam_id: '1', name: '色彩'}).then(data => {
                  this.studentWorkList = data;
              })*/
+            this.shareLinkDeepCopy=JSON.parse(JSON.stringify(this.shareLink))
             this.page.total = this.studentWorkList.length
         },
         methods: {
@@ -214,6 +230,7 @@
                 this.choosedArea = area
             },
             shareMark() {
+                this.isShowShearDialog = true
             },
             startMark() {
             },
@@ -235,17 +252,86 @@
                 this.page.currentPage = val;
                 // this.getData()
             },
+            handleCopyLink() {
+                //复制链接到粘贴板
+                document.querySelector(".shear-dialog .el-input__inner").select()
+                document.execCommand("Copy");
+                const h = this.$createElement;
+                this.$message({
+                    type: 'success',
+                    message: h('p', null, [
+                        h('i', { style: 'color: blue;font-size:16px;' }, this.shareLink),
+                        h('span', { style: 'font-size:16px;' }, '已经复制到粘贴板，赶紧去分享吧 '),
+                    ])
+                });
+            }
 
 
         },
+        watch:{
+            shareLinkDeepCopy(n) {
+                this.shareLinkDeepCopy=JSON.parse(JSON.stringify(this.shareLink))
+            },
+
+            sharingMethod(n) {
+                if (n === 1) {
+                    this.shareLink = 'https://www.baidu.com/public';
+                    this.shareLinkDeepCopy=JSON.parse(JSON.stringify(this.shareLink))
+                } else {
+                    this.shareLink = 'https://www.baidu.com/private';
+                    this.shareLinkDeepCopy=JSON.parse(JSON.stringify(this.shareLink))
+                }
+            }
+        }
 
     }
 </script>
 
+<style lang="scss">
+   .marking-exam-paper {
+      .shear-dialog {
+         .el-dialog {
+            width: 550px;
+            border-radius: 10px;
 
+            .el-dialog__header {
+               border-bottom: 1px solid #cacaca;
+               margin: 0 20px;
+            }
+
+            .el-input {
+               width: 75%;
+            }
+
+            .el-button {
+               width: 22%;
+               margin-left: 3%;
+            }
+
+            .el-radio-group {
+               margin-top: 20px;
+
+               .el-radio:nth-child(2) {
+                  margin-left: 200px;
+               }
+            }
+
+            .description span {
+               display: inline-block;
+               font-size: 12px;
+               &:first-child {
+                  margin-left: 23px;
+               }
+               &:last-child{
+                  margin-left: 150px;
+               }
+            }
+         }
+      }
+   }
+</style>
 <style scoped lang="scss">
    @import "../../assets/styles/common.scss";
-
 
    .marking-exam-paper {
       position: relative;
@@ -308,7 +394,7 @@
          margin-top: 20px;
          position: absolute;
          bottom: 10px;
-         right: 220px;
+         /*right: 220px;*/
 
       }
    }

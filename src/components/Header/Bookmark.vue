@@ -92,12 +92,12 @@
             },
             closeBookmark(name) {
                 if (this.$store.state.bookmarkList.length > 1) {
-                    this.$store.dispatch('deleteBookmark', name)
+                    this.$store.dispatch('deleteBookmark', name);
                     this.$router.push(this.$store.state.bookmarkList[this.$store.state.bookmarkList.length - 1].path);
                     //Todo
                 } else if (this.$store.state.bookmarkList.length === 1 && this.$route.path === '/exam') {
                 } else {
-                    this.$store.dispatch('deleteBookmark', name)
+                    this.$store.dispatch('deleteBookmark', name);
                     this.$router.push('/');
                 }
             },

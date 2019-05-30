@@ -123,7 +123,7 @@
             '$store.state.isSideNavCollapse'() {
                 this.asideCollapse = this.$store.state.isSideNavCollapse;
 
-                let elments = document.querySelectorAll('.aside .el-submenu__title  span, .aside .el-menu-item  span,.el-icon-arrow-down:before')
+                let elments = document.querySelectorAll('.aside .el-submenu__title  span, .aside .el-menu-item  span,.el-icon-arrow-down:before');
                 if (this.asideCollapse) {
                     elments.forEach(function (el) {
                         el.style.opacity = '0'

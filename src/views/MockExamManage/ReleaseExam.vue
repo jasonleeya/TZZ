@@ -206,7 +206,7 @@
                 return isJPG && isLt2M;
             },
             handleSubmit() {
-                this.form.exam_time = this.formatDateTime(this.form.exam_time)
+                this.form.exam_time = this.formatDateTime(this.form.exam_time);
 
                 this.mySubmit('addExam', this.form).then(state => {
                     if (state === 200) {
@@ -218,12 +218,12 @@
             handleSelectCities(query) {
 
                 if (query !== '') {
-                    this.citySelect.loading = true
+                    this.citySelect.loading = true;
 
 
                     this.mySelect('getCities', {name: query}, false).then(cities => {
-                        this.citySelect.loading = false
-                        this.citySelect.options = []
+                        this.citySelect.loading = false;
+                        this.citySelect.options = [];
                         cities.forEach(city => {
                             this.citySelect.options.push({
                                 value: city.Cname,

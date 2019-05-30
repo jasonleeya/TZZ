@@ -44,7 +44,7 @@
                 this.$store.dispatch('toggleSideNavCollapse')
             },
             toggleTheme(theme) {
-                document.body.setAttribute('theme', theme)
+                document.body.setAttribute('theme', theme);
                 localStorage.setItem('theme', theme);
             }
         },

@@ -17,6 +17,17 @@
 
          </el-row>
       </div>
+
+      <el-pagination
+              @size-change="handlePageSizeChange"
+              @current-change="handleCurrentPageChange"
+              :current-page="page.currentPage"
+              :page-sizes="[10, 20, 50, 100]"
+              :page-size="page.pageSize"
+              layout="total, sizes, prev, pager, next, jumper"
+              :total="page.total">
+      </el-pagination>
+
    </div>
 </template>
 
@@ -34,6 +45,11 @@
             return {
                 limit: '',
                 scoreList: [],
+                page: {
+                    currentPage: 1,
+                    pageSize: 12,
+                    total: 0
+                },
                 studentWorkList: [{
                     id: '1',
                     img: require('../../assets/img/pic1.jpg'),
@@ -100,9 +116,17 @@
             }
         },
         methods: {
-            handleGetClickItemInfo() {
 
-            }
+            handlePageSizeChange(val) {
+                this.page.pageSize = val;
+                this.page.currentPage = 1;
+                // this.getData()
+            },
+
+            handleCurrentPageChange(val) {
+                this.page.currentPage = val;
+                // this.getData()
+            },
         },
     }
 </script>

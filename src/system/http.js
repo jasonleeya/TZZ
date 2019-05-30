@@ -6,7 +6,7 @@ export function mySelect(url,data = {},shouldLoading=true){
     let thi = this;
     // arguments[closeLoading] ? arguments[closeLoading] : true;
     if (shouldLoading) {
-      // thi.$store.commit('fullScreenLoading',true);
+      thi.$store.commit('fullScreenLoading',true);
 
     }
     console.log('查询接口：'+url);
@@ -34,7 +34,7 @@ export function mySelectAll(url,data = {},shouldLoading=true){
     let thi = this;
     // arguments[closeLoading] ? arguments[closeLoading] : true;
     if (shouldLoading) {
-      // thi.$store.commit('fullScreenLoading',true);
+      thi.$store.commit('fullScreenLoading',true);
     }
 
 
@@ -70,7 +70,7 @@ export function mySubmit(url,data={},shouldLoading=true) {
   return new Promise((resolve, reject) => {
     let thi = this;
     if (shouldLoading) {
-      // thi.$store.commit('fullScreenLoading',true);
+      thi.$store.commit('fullScreenLoading',true);
     }
     console.log('提交接口：'+url);
     console.log(data);

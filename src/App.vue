@@ -19,9 +19,9 @@
    html,body,#app {
       width: 100%;
       height: 100%;
+      min-width: 1200px;
    }
    #app{
-      min-width: 1200px;
       background-size: 100% 100%;
       background-repeat: no-repeat;
    }

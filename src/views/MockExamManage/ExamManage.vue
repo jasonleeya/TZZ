@@ -3,8 +3,7 @@
       <div class="header">
          <div class="header-left">
             <el-dropdown @command="chooseType">
-               <el-button plain size="small">
-                  {{choosedType===1?'联考':choosedType===2?'校考':'全部'}}<i class="el-icon-arrow-down el-icon--right"></i>
+               <el-button plain size="small">{{choosedType===1?'联考':choosedType===2?'校考':'全部'}}<i class="el-icon-arrow-down el-icon--right"></i>
                </el-button>
                <el-dropdown-menu slot="dropdown">
                   <el-dropdown-item command="">全部</el-dropdown-item>
@@ -26,11 +25,8 @@
                <el-option v-for="item in citySelect.options"
                           :key="item.value"
                           :label="item.label"
-                          :value="item.value"
-                         >
-
+                          :value="item.value">
                </el-option>
-
             </el-select>
 
          </div>
